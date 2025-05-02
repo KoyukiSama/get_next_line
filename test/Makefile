@@ -1,25 +1,17 @@
 
-PROJECT_NAME := libft
-NAME         := libft.a
-
 CC           := gcc
 CFLAGS       := -Wall -Wextra -Werror
 
-SRC_DIR := ../$(PROJECT_NAME)
-SRC     := $(wildcard $(SRC_DIR)/*.c)
+SRC     := $(wildcard ../*.c)
 OBJ     := $(SRC:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
 
 TEST_MACROS := tester_macro.c
-TEST_SRC := main_ctype.c main_mem.c main_stdlib.c main_str.c main_str2.c \
-			main_fd.c main_lst_bonus.c
+TEST_SRC := test_ft_append.c
 TEST_OUT := $(TEST_SRC:%.c=%.out)
 
 PINK      := \033[38;5;13m
 PINK_HOT  := \033[38;5;201m
 RESET     := \033[0m
-
-$(NAME): $(OBJ)
-	@ar rcs $@ $^
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $^ -o $@
