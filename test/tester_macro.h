@@ -19,6 +19,9 @@ int		strscmp(char **strs1, char **strs2);
 void	print_strs(char **strs);
 void	free_strs(char **strs);
 
+#define STRING_DISPLAY(func_name)\
+	"+++++++"func_name"++++++++\n"\
+
 #define TEST_MEMCMP(res1, res2, n, name)								\
 	do {																\
 		if (memcmp(res1, res2, n) == 0)									\

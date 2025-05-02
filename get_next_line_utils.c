@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/02 17:08:53 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/02 17:59:52 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static char		*ft_stash_append_helpr(char *stash_new, char *stash_old, \
 char	*ft_stash_append(char *stash_old, const char *buff)
 {
 	char	*stash_new;
-	size_t	stash_old_ln;
-	size_t	buff_ln;
 	
 	if (!stash_old)
 	{
