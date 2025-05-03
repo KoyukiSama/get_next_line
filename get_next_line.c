@@ -6,13 +6,14 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/03 18:30:52 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/03 18:32:22 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 
+char		*ft_stash_init(t_stash *stash);
 char		*ft_stash_append(char *stash_old, const char *buff);
 static char	*ft_stash_get_line(t_stash *stash);
 static char	*ft_stash_fill(int fd, char *stash);
