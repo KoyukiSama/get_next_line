@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/03 18:32:22 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/03 23:29:39 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static char	*ft_malloc_line(size_t line_ln);
 
 char	*get_next_line(int fd)
 {
-	static t_stash	stash_arr[_SC_OPEN_MAX] = {0};
+	static t_stash	stash_arr[OPEN_SIZE] = {0};
 	char			*ret_line;
 
+	if (BUFF_SIZE <= 0 || fd < 0 || fd >= OPEN_SIZE)
+		return (NULL);
 	if (!ft_stash_init(&stash_arr[fd]))
 		return (NULL);
 	if (!ft_stash_fill(fd, stash_arr[fd].stash))
