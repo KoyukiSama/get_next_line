@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/03 18:27:14 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/03 18:54:26 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ char	*ft_stash_init(t_stash *stash)
 			return (NULL);
 		(*stash).stash[0] = '\0';
 	}
+	return((*stash).stash);
 }

@@ -2,7 +2,6 @@
 #ifndef TESTER_MACRO_H
 #define TESTER_MACRO_H
 
-#include "../libft/libft_bonus.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <ctype.h>
@@ -13,7 +12,6 @@
 #define RED "\x1b[31m"
 #define RESET "\x1b[0m"
 
-void	lst_printer(t_list *lst);
 void	memprint(const void *mem, size_t n);
 int		strscmp(char **strs1, char **strs2);
 void	print_strs(char **strs);

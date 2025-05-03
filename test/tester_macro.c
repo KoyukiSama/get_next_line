@@ -1,20 +1,5 @@
 
 #include "tester_macro.h"
-#include "../libft/libft_bonus.h"
-
-void lst_printer(t_list *lst)
-{
-	while (lst)
-	{
-		if (!lst)
-			break;
-		printf("[ \"%s\" ] ", (char *) lst->content);
-		printf("-> ");
-		lst = lst->next;
-	}
-	printf("NULL");
-	printf("\n");
-}
 
 void memprint(const void *mem, size_t n)
 {
