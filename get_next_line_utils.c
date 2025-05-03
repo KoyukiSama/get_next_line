@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/02 17:59:52 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/03 16:48:52 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char		*ft_stash_append_helpr(char *stash_new, char *stash_old, \
 char	*ft_stash_append(char *stash_old, const char *buff)
 {
 	char	*stash_new;
-	
+
 	if (!stash_old)
 	{
 		stash_old = malloc(1);
@@ -43,7 +43,7 @@ static char	*ft_stash_append_helpr(char *stash_new, char *stash_old, \
 {
 	size_t	i;
 	size_t	j;
-	
+
 	i = 0;
 	j = 0;
 	while (stash_old[j])
