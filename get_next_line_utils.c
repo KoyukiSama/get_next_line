@@ -6,10 +6,11 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/03 16:48:52 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/03 18:27:14 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -23,15 +24,6 @@ char	*ft_stash_append(char *stash_old, const char *buff)
 {
 	char	*stash_new;
 
-	if (!stash_old)
-	{
-		stash_old = malloc(1);
-		if (!stash_old)
-			return (NULL);
-		*stash_old = '\0';
-		if (!stash_old)
-			return (NULL);
-	}
 	stash_new = malloc(ft_strlen(stash_old) + ft_strlen(buff) + 1);
 	if (!stash_new)
 		return (free(stash_old), NULL);
@@ -64,4 +56,16 @@ static size_t	ft_strlen(const char *str)
 	while (str[str_len])
 		str_len++;
 	return (str_len);
+}
+
+char	*ft_stash_init(t_stash *stash)
+{
+	if (!(*stash).stash_strt_ptr)
+	{
+		(*stash).stash_strt_ptr = malloc(1);
+		(*stash).stash = (*stash).stash_strt_ptr;
+		if (!(*stash).stash)
+			return (NULL);
+		(*stash).stash[0] = '\0';
+	}
 }

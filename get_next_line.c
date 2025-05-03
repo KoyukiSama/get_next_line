@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/03 16:48:36 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/03 18:30:52 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,20 @@
 char		*ft_stash_append(char *stash_old, const char *buff);
 static char	*ft_stash_get_line(t_stash *stash);
 static char	*ft_stash_fill(int fd, char *stash);
-static void	ft_stash_free(t_stash *stash);
+static char	*ft_stash_free(t_stash *stash);
 static char	*ft_malloc_line(size_t line_ln);
 
 char	*get_next_line(int fd)
 {
-	static t_stash	*stash_arr[_SC_OPEN_MAX];
+	static t_stash	stash_arr[_SC_OPEN_MAX] = {0};
 	char			*ret_line;
+
+	if (!ft_stash_init(&stash_arr[fd]))
+		return (NULL);
+	if (!ft_stash_fill(fd, stash_arr[fd].stash))
+		return (ft_stash_free(&stash_arr[fd]));
+	ret_line = ft_stash_get_line(&stash_arr[fd]);
+	return (ret_line);
 }
 
 static char	*ft_stash_get_line(t_stash *stash)
@@ -70,11 +77,12 @@ static char	*ft_stash_fill(int fd, char *stash)
 	}
 }
 
-static void	ft_stash_free(t_stash *stash)
+static char	*ft_stash_free(t_stash *stash)
 {
 	free((*stash).stash_strt_ptr);
 	(*stash).stash = NULL;
 	(*stash).stash_strt_ptr = NULL;
+	return (NULL);
 }
 
 static char	*ft_malloc_line(size_t line_ln)
