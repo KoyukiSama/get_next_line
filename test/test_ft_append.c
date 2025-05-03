@@ -5,6 +5,8 @@
 #include <string.h>
 #include <ctype.h>
 
+char	*ft_stash_append(char *stash_old, const char *buff);
+
 int main(void)
 {
 	printf(STRING_DISPLAY("ft_stash_append"));
