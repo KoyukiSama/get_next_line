@@ -33,10 +33,10 @@ testclean:
 retest: testclean test clean
 	@i=1;
 	@for outp in $(TEST_OUT); do \
-	  printf "$(PINK)<3-----------|$(PINK_HOT) [TEST %d] : %s $(PINK)|---------------<3\n$(RESET)" "$$i" "$$outp"; \
-	  valgrind --leak-check=full --track-origins=yes --show-reachable=yes --track-fds=yes -q ./$$outp; \
-	 ..../$$outp; \
-	  i=$$((i+1)); \
+		printf "$(PINK)<3-----------|$(PINK_HOT) [TEST %d] : %s $(PINK)|---------------<3\n$(RESET)" "$$i" "$$outp"; \
+		!valgrind --leak-check=full --track-origins=yes --show-reachable=yes --track-fds=yes -q ./$$outp; \
+		./$$outp; \
+		i=$$((i+1)); \
 	done
 
 .PHONY: test clean testclean retest
