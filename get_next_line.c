@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 14:25:37 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/06 16:53:28 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,16 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!ft_stash_init(&stash_arr[fd]))
 		return (NULL);
-	if (!ft_stash_fill(fd, &stash_arr[fd]))
-		return (ft_clean_exit(&stash_arr[fd]));
+	if (stash_arr[fd].stash_strt_ptr == stash_arr[fd].stash)
+	{
+		if (!ft_stash_fill(fd, &stash_arr[fd]))
+			return (ft_clean_exit(&stash_arr[fd]));
+	}
+	fprintf(stderr, _GREEN"%p\n"_RESET, stash_arr[fd].stash_strt_ptr);
+	fprintf(stderr, _GREEN"%p\n"_RESET, stash_arr[fd].stash);
 	ret_line = ft_stash_get_line(&stash_arr[fd]);
+	fprintf(stderr, _GREEN"%p\n"_RESET, stash_arr[fd].stash_strt_ptr);
+	fprintf(stderr, _GREEN"%p\n"_RESET, stash_arr[fd].stash);
 	return (ret_line);
 }
 
@@ -61,7 +68,7 @@ static char	*ft_stash_get_line(t_stash *stash)
 	if (stash->stash[i - 1] == '\n')
 		ft_clean_exit(stash);
 	else
-		stash->stash = stash->stash + i + 1;
+		stash->stash += i;
 	return (line);
 }
 

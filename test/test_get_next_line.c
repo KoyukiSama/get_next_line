@@ -10,5 +10,11 @@ int main(void)
 {
 	char *line = get_next_line(0);
 	printf("\nread: %s\n", line);
+	
+	line = get_next_line(0);
+	printf("\nread: %s\n", line);
+	
+	line = get_next_line(0);
+	printf("\nread: %s\n", line);
 	free(line);
 }
