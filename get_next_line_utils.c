@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 14:21:13 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/06 18:36:40 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static size_t	ft_strlen(const char *str);
 static char		*ft_stash_append_helpr(char *stash_new, char *stash_old, \
 									const char *buff);
 char			*ft_clean_exit(t_stash *stash);
+
 // if (stash_old is NULL) ~ starting condition,
 // it will create an empty ft_strempty
 char	*ft_stash_append(t_stash *stash_old, const char *buff)
@@ -70,5 +71,5 @@ char	*ft_stash_init(t_stash *stash)
 			return (NULL);
 		stash->stash[0] = '\0';
 	}
-	return(stash->stash);
+	return (stash->stash);
 }
