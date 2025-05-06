@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 18:37:07 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/06 19:04:19 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 char		*ft_stash_init(t_stash *stash);
-char		*ft_stash_append(t_stash *stash_old, const char *buff);
+char		*ft_stash_append(t_stash *stash, const char *buff);
 char		*ft_clean_exit(t_stash *stash);
 static char	*ft_stash_get_line(t_stash *stash);
 static char	*ft_stash_fill(int fd, t_stash *stash);
@@ -79,10 +79,10 @@ static char	*ft_stash_fill(int fd, t_stash *stash)
 	{
 		bytes_read = read(fd, buff, BUFF_SIZE);
 		if (bytes_read < 0)
-			return (NULL);
+			return (ft_clean_exit(stash));
 		buff[bytes_read] = '\0';
-		stash->stash_strt_ptr = ft_stash_append(stash, buff);
-		stash->stash = stash->stash_strt_ptr;
+		if (!ft_stash_append(stash, buff))
+			return (ft_clean_exit(stash));
 	}
 	return (stash->stash_strt_ptr);
 }

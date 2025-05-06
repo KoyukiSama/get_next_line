@@ -11,24 +11,16 @@ int main(void)
 {
 	int fd = open("file.txt", O_RDONLY);
 
-	char *line = get_next_line(0);
-	printf("\nread: %s\n", line);
+	char *line;
 
-	line = get_next_line(fd);
-	printf("\nread: %s\n", line);
+	for (int i = 0; i < 7; i++)
+	{
+		line = get_next_line(0);
+		printf("\nread: %s\n", line);
+		free(line);
 
-	line = get_next_line(0);
-	printf("\nread: %s\n", line);
-
-	line = get_next_line(fd);
-	printf("\nread: %s\n", line);
-	
-	line = get_next_line(0);
-	printf("\nread: %s\n", line);
-
-
-	line = get_next_line(fd);
-	printf("\nread: %s\n", line);
-
-	free(line);
+		line = get_next_line(fd);
+		printf("\nread: %s\n", line);
+		free(line);
+	}
 }
