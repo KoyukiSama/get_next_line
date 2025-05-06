@@ -4,8 +4,8 @@ NAME	:= get_next_line
 CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror -D BUFFER_SIZE=42
 
-SRC			:= get_next_line.c get_next_line_utils.c
-OBJ_SRC		:= $(OBJ_SRC:.c=.o)
+SRC		:= get_next_line.c get_next_line_utils.c
+OBJ_SRC	:= $(OBJ_SRC:.c=.o)
 
 ifdef BONUS
 OBJ := $(OBJ_SRC) $(OBJ_SRC_BONUS)
