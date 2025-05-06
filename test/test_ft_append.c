@@ -5,13 +5,20 @@
 #include <string.h>
 #include <ctype.h>
 
-char	*ft_stash_append(char *stash_old, const char *buff);
+char	*ft_stash_append(t_stash *stash_old, const char *buff);
 
 int main(void)
 {
 	printf(STRING_DISPLAY("ft_stash_append"));
 
-	char	*stash = NULL;
+	t_stash	stash;
+
+	stash.stash_strt_ptr = malloc(1);
+	if (!stash.stash_strt_ptr)
+		return (1);
+	stash.stash_strt_ptr[0] = '\0';
+	stash.stash = stash.stash_strt_ptr;
+
 	char	buff1[] = "hi";
 	char	buff2[] = ", ";
 	char	buff3[] = "my name ";
@@ -35,24 +42,24 @@ int main(void)
 						"en ik kom van de ghost schoooooooool ";
 	char	corr9[] = "hi, my name is casper het spook "\
 						"en ik kom van de ghost schoooooooool ";
-	stash = ft_stash_append(stash, buff1);
-	TEST_STRCMP_NOFREE(stash, corr1, "");
-	stash = ft_stash_append(stash, buff2);
-	TEST_STRCMP_NOFREE(stash, corr2, "");
-	stash = ft_stash_append(stash, buff3);
-	TEST_STRCMP_NOFREE(stash, corr3, "");
-	stash = ft_stash_append(stash, buff4);
-	TEST_STRCMP_NOFREE(stash, corr4, "");
-	stash = ft_stash_append(stash, buff5);
-	TEST_STRCMP_NOFREE(stash, corr5, "");
-	stash = ft_stash_append(stash, buff6);
-	TEST_STRCMP_NOFREE(stash, corr6, "");
-	stash = ft_stash_append(stash, buff7);
-	TEST_STRCMP_NOFREE(stash, corr7, "");
-	stash = ft_stash_append(stash, buff8);
-	TEST_STRCMP_NOFREE(stash, corr8, "");
-	stash = ft_stash_append(stash, buff9);
-	TEST_STRCMP_NOFREE(stash, corr9, "hi, my name is casper het spook "\
+	stash.stash = ft_stash_append(&stash, buff1);
+	TEST_STRCMP_NOFREE(stash.stash, corr1, "");
+	stash.stash = ft_stash_append(&stash, buff2);
+	TEST_STRCMP_NOFREE(stash.stash, corr2, "");
+	stash.stash = ft_stash_append(&stash, buff3);
+	TEST_STRCMP_NOFREE(stash.stash, corr3, "");
+	stash.stash = ft_stash_append(&stash, buff4);
+	TEST_STRCMP_NOFREE(stash.stash, corr4, "");
+	stash.stash = ft_stash_append(&stash, buff5);
+	TEST_STRCMP_NOFREE(stash.stash, corr5, "");
+	stash.stash = ft_stash_append(&stash, buff6);
+	TEST_STRCMP_NOFREE(stash.stash, corr6, "");
+	stash.stash = ft_stash_append(&stash, buff7);
+	TEST_STRCMP_NOFREE(stash.stash, corr7, "");
+	stash.stash = ft_stash_append(&stash, buff8);
+	TEST_STRCMP_NOFREE(stash.stash, corr8, "");
+	stash.stash = ft_stash_append(&stash, buff9);
+	TEST_STRCMP_NOFREE(stash.stash, corr9, "hi, my name is casper het spook "\
 						"en ik kom van de ghost schoooooooool ");
-	free(stash);
+	free(stash.stash_strt_ptr);
 }

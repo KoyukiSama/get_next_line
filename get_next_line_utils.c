@@ -6,13 +6,15 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 13:27:51 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/06 14:21:13 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
+
+#include <stdio.h>
 
 static size_t	ft_strlen(const char *str);
 static char		*ft_stash_append_helpr(char *stash_new, char *stash_old, \

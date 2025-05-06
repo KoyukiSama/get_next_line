@@ -6,12 +6,14 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 13:31:18 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/06 14:25:37 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 char		*ft_stash_init(t_stash *stash);
 char		*ft_stash_append(t_stash *stash_old, const char *buff);
@@ -73,16 +75,17 @@ static char	*ft_stash_fill(int fd, t_stash *stash)
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buff, BUFF_SIZE);
-		if (bytes_read <= 0)
+		if (bytes_read < 0)
 			return (NULL);
 		buff[bytes_read] = '\0';
 		stash->stash_strt_ptr = ft_stash_append(stash, buff);
 		stash->stash = stash->stash_strt_ptr;
 	}
+	fprintf(stderr, _GREEN"ft_stash_fill [stash]: %s\n"_RESET, stash->stash_strt_ptr);
 	return (stash->stash_strt_ptr);
 }
 
-static char	*ft_clean_exit(t_stash *stash)
+char	*ft_clean_exit(t_stash *stash)
 {
 	free(stash->stash_strt_ptr);
 	stash->stash = NULL;
