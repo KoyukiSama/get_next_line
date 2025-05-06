@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/03 18:54:26 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/06 13:27:51 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 static size_t	ft_strlen(const char *str);
 static char		*ft_stash_append_helpr(char *stash_new, char *stash_old, \
 									const char *buff);
-
+char			*ft_clean_exit(t_stash *stash);
 // if (stash_old is NULL) ~ starting condition,
 // it will create an empty ft_strempty
-char	*ft_stash_append(char *stash_old, const char *buff)
+char	*ft_stash_append(t_stash *stash_old, const char *buff)
 {
 	char	*stash_new;
 
-	stash_new = malloc(ft_strlen(stash_old) + ft_strlen(buff) + 1);
+	stash_new = malloc(ft_strlen(stash_old->stash) + ft_strlen(buff) + 1);
 	if (!stash_new)
-		return (free(stash_old), NULL);
-	return (ft_stash_append_helpr(stash_new, stash_old, buff));
+		return (ft_clean_exit(stash_old));
+	return (ft_stash_append_helpr(stash_new, stash_old->stash_strt_ptr, buff));
 }
 
 static char	*ft_stash_append_helpr(char *stash_new, char *stash_old, \
@@ -60,13 +60,13 @@ static size_t	ft_strlen(const char *str)
 
 char	*ft_stash_init(t_stash *stash)
 {
-	if (!(*stash).stash_strt_ptr)
+	if (!stash->stash_strt_ptr)
 	{
-		(*stash).stash_strt_ptr = malloc(1);
-		(*stash).stash = (*stash).stash_strt_ptr;
-		if (!(*stash).stash)
+		stash->stash_strt_ptr = malloc(1);
+		stash->stash = stash->stash_strt_ptr;
+		if (!stash->stash)
 			return (NULL);
-		(*stash).stash[0] = '\0';
+		stash->stash[0] = '\0';
 	}
-	return((*stash).stash);
+	return(stash->stash);
 }
