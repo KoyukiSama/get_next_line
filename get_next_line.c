@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 18:47:37 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 22:47:33 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char		*ft_stash_get_line(t_stash *stash);
 int			ft_needs_fill(t_stash *t_stash);
 char		*ft_stash_fill(int fd, t_stash *stash);
 
-#include <stdio.h>
 char	*get_next_line(int fd)
 {
 	static t_stash	stash_arr[OPEN_MAX] = {0};
@@ -45,7 +44,7 @@ char	*get_next_line(int fd)
 char	*ft_stash_fill(int fd, t_stash *stash)
 {
 	char	*buff;
-	
+
 	buff = malloc(BUFF_SIZE + 1);
 	if (!buff)
 		return (free(buff), ft_clean_exit(stash));
@@ -54,7 +53,7 @@ char	*ft_stash_fill(int fd, t_stash *stash)
 		if (!ft_buff_read(buff, fd))
 			return (free(buff), NULL);
 		if (buff[0] == '\0')
-			break;
+			break ;
 		if (!ft_stash_append(stash, buff))
 			return (free(buff), NULL);
 	}
@@ -65,7 +64,7 @@ char	*ft_stash_fill(int fd, t_stash *stash)
 char	*ft_buff_read(char *buff, int fd)
 {
 	ssize_t	bytes_read;
-	
+
 	bytes_read = read(fd, buff, BUFF_SIZE);
 	if (bytes_read == -1)
 		return (free(buff), NULL);
