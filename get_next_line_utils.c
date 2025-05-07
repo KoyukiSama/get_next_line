@@ -6,15 +6,13 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 19:07:17 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 13:44:52 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-#include <stdio.h>
 
 static size_t	ft_strlen(const char *str);
 static void		ft_stash_append_helpr(char *stash_new, t_stash *stash, \
@@ -70,7 +68,7 @@ char	*ft_stash_init(t_stash *stash)
 		stash->stash_strt_ptr = malloc(1);
 		stash->stash = stash->stash_strt_ptr;
 		if (!stash->stash)
-			return (NULL);
+			return (ft_clean_exit(stash));
 		stash->stash[0] = '\0';
 	}
 	return (stash->stash);

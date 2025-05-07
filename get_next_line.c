@@ -6,14 +6,13 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/06 19:04:19 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 13:46:00 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 char		*ft_stash_init(t_stash *stash);
 char		*ft_stash_append(t_stash *stash, const char *buff);
@@ -71,25 +70,28 @@ static char	*ft_stash_get_line(t_stash *stash)
 // read into buffer
 static char	*ft_stash_fill(int fd, t_stash *stash)
 {
-	char	buff[BUFF_SIZE + 1];
 	ssize_t	bytes_read;
+	char	*buff;
 
+	buff = malloc(BUFF_SIZE + 1);
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buff, BUFF_SIZE);
 		if (bytes_read < 0)
-			return (ft_clean_exit(stash));
+			return (free(buff), ft_clean_exit(stash));
 		buff[bytes_read] = '\0';
 		if (!ft_stash_append(stash, buff))
-			return (ft_clean_exit(stash));
+			return (free(buff), ft_clean_exit(stash));
 	}
+	free(buff);
 	return (stash->stash_strt_ptr);
 }
 
 char	*ft_clean_exit(t_stash *stash)
 {
-	free(stash->stash_strt_ptr);
+	if (stash->stash_strt_ptr)
+		free(stash->stash_strt_ptr);
 	stash->stash = NULL;
 	stash->stash_strt_ptr = NULL;
 	return (NULL);

@@ -13,6 +13,12 @@ int main(void)
 	int fd2 = open("test2.txt", O_RDONLY);
 	int fd3 = open("test3.txt", O_RDONLY);
 	int fd4 = open("test4.txt", O_RDONLY);
+	int fd5 = open("test5.txt", O_RDONLY);
+	int fd6 = open("test6.txt", O_RDONLY);
+	int fd7f0 = open("test7-0.txt", O_RDONLY);
+	int fd7f1 = open("test7-1.txt", O_RDONLY);
+	int fd7f2 = open("test7-2.txt", O_RDONLY);
+	int fd7f3 = open("test7-3.txt", O_RDONLY);
 	char *line;
 
 	printf("0----------test1.txt | simple test----------0\n");
@@ -43,6 +49,42 @@ int main(void)
 	for (int i = 0; i < 1; i++)
 	{
 		line = get_next_line(fd4);
+		printf("%s", line);
+		free(line);
+	}
+	
+	printf("\n0----------test5.txt | 4 enters----------0\n");
+	for (int i = 0; i < 3; i++)
+	{
+		line = get_next_line(fd5);
+		printf("%s", line);
+		free(line);
+	}
+	
+	printf("\n0----------test6.txt | empty file----------0\n");
+	for (int i = 0; i < 1; i++)
+	{
+		line = get_next_line(fd6);
+		printf("%s", line);
+		free(line);
+	}
+	
+	printf("\n0----------test7.txt | 4 fds in sync----------0\n");
+	for (int i = 0; i < 10; i++)
+	{
+		line = get_next_line(fd7f0);
+		printf("%s", line);
+		free(line);
+
+		line = get_next_line(fd7f1);
+		printf("%s", line);
+		free(line);
+		
+		line = get_next_line(fd7f2);
+		printf("%s", line);
+		free(line);
+		
+		line = get_next_line(fd7f3);
 		printf("%s", line);
 		free(line);
 	}
