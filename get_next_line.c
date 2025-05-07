@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 17:41:02 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 18:00:30 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	*ft_stash_get_line(t_stash *stash)
 	size_t	i;
 
 	i = 0;
+	fprintf(stderr, _GREEN"%i "_RESET, stash->stash[i]);
 	while (stash->stash[i] != '\n' && stash->stash[i] != '\0')
 		i++;
 	if (stash->stash[i] == '\n')
@@ -101,10 +102,14 @@ char	*ft_stash_get_line(t_stash *stash)
 		ft_clean_exit(stash);
 	i = 0;
 	while (stash->stash[i] != '\n' && stash->stash[i] != '\0')
+	{
 		line[i] = stash->stash[i];
+		i++;
+	}
 	line[i] = '\0';
 	if (*stash->stash == '\0')
 		return(ft_clean_exit(stash), line);
+	stash->stash += i;
 	return (line);
 }
 
