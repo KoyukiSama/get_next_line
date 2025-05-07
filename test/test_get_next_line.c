@@ -19,6 +19,7 @@ int main(void)
 	int fd7f1 = open("test7-1.txt", O_RDONLY);
 	int fd7f2 = open("test7-2.txt", O_RDONLY);
 	int fd7f3 = open("test7-3.txt", O_RDONLY);
+	int fdLOBSTER = open("testLOBSTER.txt", O_RDONLY);
 	char *line;
 
 	printf("0----------test1.txt | simple test----------0\n");
@@ -87,5 +88,40 @@ int main(void)
 		line = get_next_line(fd7f3);
 		printf("%s", line);
 		free(line);
+	}
+	
+	#define DARK_RED "\033[38;5;196m"
+	#define COCONUT "\033[38;5;94m"
+	printf("\n0----------test8.txt | LOBSTERRR----------0\n");
+	line = get_next_line(fdLOBSTER);
+	printf("%s", line);
+	free(line);
+	for (size_t i = 0; i < 200000; i++)
+	{
+		line = get_next_line(fdLOBSTER);
+		line[strlen(line) - 1] = '\0';
+		printf("%s", line);
+		free(line);
+
+		line = get_next_line(fdLOBSTER);
+		line[strlen(line) - 1] = '\0';
+		printf(DARK_RED"%s"RESET, line);
+		free(line);
+		
+		line = get_next_line(fdLOBSTER);
+		line[strlen(line) - 1] = '\0';
+		printf("%s", line);
+		free(line);
+
+		line = get_next_line(fdLOBSTER);
+		line[strlen(line) - 1] = '\0';
+		printf(COCONUT"%s"RESET, line);
+		free(line);
+
+		line = get_next_line(fdLOBSTER);
+		printf("%s", line);
+		free(line);
+
+		printf("#%lu\n", i);
 	}
 }
