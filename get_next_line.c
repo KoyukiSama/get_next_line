@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 22:47:33 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 23:10:32 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 	static t_stash	stash_arr[OPEN_MAX] = {0};
 	char			*ret_line;
 
-	if (BUFF_SIZE <= 0 || fd < 0 || fd >= OPEN_MAX)
+	if (BUFF_SIZE <= 0 || fd < 0 || fd >= OPEN_MAX || read(fd, 0, 0) == -1)
 		return (NULL);
 	if (!ft_stash_init(&stash_arr[fd]))
 		return (NULL);
@@ -67,7 +67,7 @@ char	*ft_buff_read(char *buff, int fd)
 
 	bytes_read = read(fd, buff, BUFF_SIZE);
 	if (bytes_read == -1)
-		return (free(buff), NULL);
+		return (NULL);
 	buff[bytes_read] = '\0';
 	return (buff);
 }

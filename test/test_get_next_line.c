@@ -133,4 +133,16 @@ int main(void)
 
 		printf("#%lu\n", i);
 	}
+	
+	close(fd1);
+	close(fd2);
+	close(fd3);
+	close(fd4);
+	close(fd5);
+	close(fd6);
+	close(fd7f0);
+	close(fd7f1);
+	close(fd7f2);
+	close(fd7f3);
+	close(fdLOBSTER);
 }
