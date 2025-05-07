@@ -6,14 +6,18 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:26:20 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 13:44:24 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 18:41:51 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE BUFFER_SIZE
+# ifdef BUFFER_SIZE
+#  define BUFF_SIZE BUFFER_SIZE
+# else
+#  define BUFF_SIZE 42
+# endif
 # define OPEN_MAX 1024
 # define _RED "\x1b[91m"
 # define _GREEN "\x1b[32m"

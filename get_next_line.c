@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 18:00:30 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 18:47:37 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char		*ft_clean_exit(t_stash *stash);
 char		*ft_stash_get_line(t_stash *stash);
 int			ft_needs_fill(t_stash *t_stash);
 char		*ft_stash_fill(int fd, t_stash *stash);
-static char	*ft_malloc_line(size_t line_ln);
 
 #include <stdio.h>
 char	*get_next_line(int fd)
@@ -89,33 +88,27 @@ int	ft_needs_fill(t_stash *t_stash)
 char	*ft_stash_get_line(t_stash *stash)
 {
 	char	*line;
+	size_t	len;
 	size_t	i;
 
-	i = 0;
-	fprintf(stderr, _GREEN"%i "_RESET, stash->stash[i]);
-	while (stash->stash[i] != '\n' && stash->stash[i] != '\0')
-		i++;
-	if (stash->stash[i] == '\n')
-		i++;
-	line = ft_malloc_line(i);
+	len = 0;
+	while (stash->stash[len] != '\n' && stash->stash[len] != '\0')
+		len++;
+	if (stash->stash[len] == '\n')
+		len++;
+	line = malloc(len + 1);
 	if (!line)
 		ft_clean_exit(stash);
 	i = 0;
-	while (stash->stash[i] != '\n' && stash->stash[i] != '\0')
+	while (i < len)
 	{
 		line[i] = stash->stash[i];
 		i++;
 	}
 	line[i] = '\0';
-	if (*stash->stash == '\0')
-		return(ft_clean_exit(stash), line);
-	stash->stash += i;
+	if (line[0] == '\0')
+		return (ft_clean_exit(stash));
+	else
+		stash->stash += i;
 	return (line);
-}
-
-static char	*ft_malloc_line(size_t line_ln)
-{
-	if (line_ln == 0)
-		return (NULL);
-	return (malloc(line_ln + 1));
 }
