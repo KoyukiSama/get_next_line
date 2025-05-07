@@ -1,6 +1,6 @@
 
 CC          := gcc
-CFLAGS      := -Wall -Wextra -Werror -D BUFFER_SIZE=2000000
+CFLAGS      := -Wall -Wextra -Werror -D BUFFER_SIZE=3
 
 SRC_DIR		:= ..
 

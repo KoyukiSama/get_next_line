@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 15:01:37 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/07 17:41:02 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 
 char		*ft_stash_init(t_stash *stash);
 char		*ft_stash_append(t_stash *stash, const char *buff);
+char		*ft_buff_read(char *buff, int fd);
 char		*ft_clean_exit(t_stash *stash);
-static char	*ft_stash_get_line(t_stash *stash);
-static char	*ft_stash_fill(int fd, t_stash *stash);
+char		*ft_stash_get_line(t_stash *stash);
+int			ft_needs_fill(t_stash *t_stash);
+char		*ft_stash_fill(int fd, t_stash *stash);
 static char	*ft_malloc_line(size_t line_ln);
 
+#include <stdio.h>
 char	*get_next_line(int fd)
 {
 	static t_stash	stash_arr[OPEN_MAX] = {0};
@@ -30,7 +33,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!ft_stash_init(&stash_arr[fd]))
 		return (NULL);
-	if (stash_arr[fd].stash_strt_ptr == stash_arr[fd].stash)
+	if (&stash_arr[fd].stash == &stash_arr[fd].stash_strt_ptr
+		|| ft_needs_fill(&stash_arr[fd]))
 	{
 		if (!ft_stash_fill(fd, &stash_arr[fd]))
 			return (ft_clean_exit(&stash_arr[fd]));
@@ -39,62 +43,69 @@ char	*get_next_line(int fd)
 	return (ret_line);
 }
 
-static char	*ft_stash_get_line(t_stash *stash)
+char	*ft_stash_fill(int fd, t_stash *stash)
 {
-	size_t	line_ln;
+	char	*buff;
+	
+	buff = malloc(BUFF_SIZE + 1);
+	if (!buff)
+		return (free(buff), ft_clean_exit(stash));
+	while (ft_needs_fill(stash))
+	{
+		if (!ft_buff_read(buff, fd))
+			return (free(buff), NULL);
+		if (buff[0] == '\0')
+			break;
+		if (!ft_stash_append(stash, buff))
+			return (free(buff), NULL);
+	}
+	free(buff);
+	return (stash->stash);
+}
+
+char	*ft_buff_read(char *buff, int fd)
+{
+	ssize_t	bytes_read;
+	
+	bytes_read = read(fd, buff, BUFF_SIZE);
+	if (bytes_read == -1)
+		return (free(buff), NULL);
+	buff[bytes_read] = '\0';
+	return (buff);
+}
+
+int	ft_needs_fill(t_stash *t_stash)
+{
+	size_t	i;
+
+	i = 0;
+	while (t_stash->stash[i] != '\n' && t_stash->stash[i] != '\0')
+		i++;
+	if (t_stash->stash[i] == '\0')
+		return (1);
+	return (0);
+}
+
+char	*ft_stash_get_line(t_stash *stash)
+{
 	char	*line;
 	size_t	i;
 
-	line_ln = 0;
-	while (stash->stash[line_ln] != '\n' && stash->stash[line_ln] != '\0')
-		line_ln++;
-	if (stash->stash[line_ln] == '\n')
-		line_ln++;
-	line = ft_malloc_line(line_ln);
-	if (!line)
-		return (NULL);
 	i = 0;
-	while (i < line_ln)
-	{
-		line[i] = stash->stash[i];
+	while (stash->stash[i] != '\n' && stash->stash[i] != '\0')
 		i++;
-	}
-	line[i] = '\0';
-	if (stash->stash[i] == '\0')
+	if (stash->stash[i] == '\n')
+		i++;
+	line = ft_malloc_line(i);
+	if (!line)
 		ft_clean_exit(stash);
-	else
-		stash->stash += i;
+	i = 0;
+	while (stash->stash[i] != '\n' && stash->stash[i] != '\0')
+		line[i] = stash->stash[i];
+	line[i] = '\0';
+	if (*stash->stash == '\0')
+		return(ft_clean_exit(stash), line);
 	return (line);
-}
-
-// read into buffer
-static char	*ft_stash_fill(int fd, t_stash *stash)
-{
-	ssize_t	bytes_read;
-	char	*buff;
-
-	buff = malloc(BUFF_SIZE + 1);
-	bytes_read = 1;
-	while (bytes_read > 0)
-	{
-		bytes_read = read(fd, buff, BUFF_SIZE);
-		if (bytes_read < 0)
-			return (free(buff), ft_clean_exit(stash));
-		buff[bytes_read] = '\0';
-		if (!ft_stash_append(stash, buff))
-			return (free(buff), ft_clean_exit(stash));
-	}
-	free(buff);
-	return (stash->stash_strt_ptr);
-}
-
-char	*ft_clean_exit(t_stash *stash)
-{
-	if (stash->stash_strt_ptr)
-		free(stash->stash_strt_ptr);
-	stash->stash = NULL;
-	stash->stash_strt_ptr = NULL;
-	return (NULL);
 }
 
 static char	*ft_malloc_line(size_t line_ln)

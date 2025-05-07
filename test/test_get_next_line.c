@@ -21,13 +21,13 @@ int main(void)
 	int fd7f3 = open("test7-3.txt", O_RDONLY);
 	char *line;
 
-	printf("0----------stdinput.txt | simple test----------0\n");
-	for (int i = 0; i < 5; i++)
-	{
-		line = get_next_line(0);
-		printf("%s", line);
-		free(line);
-	}
+	// printf("0----------stdinput.txt | simple test----------0\n");
+	// for (int i = 0; i < 5; i++)
+	// {
+	// 	line = get_next_line(0);
+	// 	printf("%s", line);
+	// 	free(line);
+	// }
 
 	printf("0----------test1.txt | simple test----------0\n");
 	for (int i = 0; i < 4; i++)
