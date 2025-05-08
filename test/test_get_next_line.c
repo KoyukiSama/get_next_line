@@ -97,42 +97,43 @@ int main(void)
 		free(line);
 	}
 	
-	int fdLOBSTER = open("testLOBSTER.txt", O_RDONLY);
-	#define DARK_RED "\033[38;5;196m"
-	#define COCONUT "\033[38;5;94m"
-	printf("\n0----------test8.txt | LOBSTERRR----------0\n");
-	line = get_next_line(fdLOBSTER);
-	printf("%s", line);
-	free(line);
-	for (size_t i = 0; i < 200000; i++)
-	{
-		line = get_next_line(fdLOBSTER);
-		line[strlen(line) - 1] = '\0';
-		printf("%s", line);
-		free(line);
+	// int fdLOBSTER = open("testLOBSTER.txt", O_RDONLY);
+	// #define DARK_RED "\033[38;5;196m"
+	// #define COCONUT "\033[38;5;94m"
+	// printf("\n0----------test8.txt | LOBSTERRR----------0\n");
+	// line = get_next_line(fdLOBSTER);
+	// printf("%s", line);
+	// free(line);
+	// for (size_t i = 0; i < 200000; i++)
+	// {
+	// 	line = get_next_line(fdLOBSTER);
+	// 	line[strlen(line) - 1] = '\0';
+	// 	printf("%s", line);
+	// 	free(line);
 
-		line = get_next_line(fdLOBSTER);
-		line[strlen(line) - 1] = '\0';
-		printf(DARK_RED"%s"RESET, line);
-		free(line);
+	// 	line = get_next_line(fdLOBSTER);
+	// 	line[strlen(line) - 1] = '\0';
+	// 	printf(DARK_RED"%s"RESET, line);
+	// 	free(line);
 		
-		line = get_next_line(fdLOBSTER);
-		line[strlen(line) - 1] = '\0';
-		printf("%s", line);
-		free(line);
+	// 	line = get_next_line(fdLOBSTER);
+	// 	line[strlen(line) - 1] = '\0';
+	// 	printf("%s", line);
+	// 	free(line);
 
-		line = get_next_line(fdLOBSTER);
-		line[strlen(line) - 1] = '\0';
-		printf(COCONUT"%s"RESET, line);
-		free(line);
+	// 	line = get_next_line(fdLOBSTER);
+	// 	line[strlen(line) - 1] = '\0';
+	// 	printf(COCONUT"%s"RESET, line);
+	// 	free(line);
 
-		line = get_next_line(fdLOBSTER);
-		line[strlen(line) - 1] = '\0';
-		printf("%s", line);
-		free(line);
+	// 	line = get_next_line(fdLOBSTER);
+	// 	line[strlen(line) - 1] = '\0';
+	// 	printf("%s", line);
+	// 	free(line);
 
-		printf("#%lu\n", i);
-	}
+	// 	printf("#%lu\n", i);
+	// }
+	//close(fdLOBSTER);
 	
 	close(fd1);
 	close(fd2);
@@ -144,5 +145,4 @@ int main(void)
 	close(fd7f1);
 	close(fd7f2);
 	close(fd7f3);
-	close(fdLOBSTER);
 }

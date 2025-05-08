@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:36:52 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 23:10:32 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/08 14:24:23 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*ft_stash_get_line(t_stash *stash)
 	}
 	line[i] = '\0';
 	if (line[0] == '\0')
-		return (ft_clean_exit(stash));
+		return (free(line), ft_clean_exit(stash));
 	else
 		stash->stash += i;
 	return (line);
