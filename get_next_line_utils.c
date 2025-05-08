@@ -6,17 +6,17 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:10:47 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 16:51:07 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/08 15:34:03 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-static size_t	ft_strlen(const char *str);
-static void		ft_stash_append_helpr(char *stash_new, t_stash *stash, \
+size_t	ft_strlen(const char *str);
+void	ft_stash_append_helpr(char *stash_new, t_stash *stash, \
 									const char *buff);
-char			*ft_clean_exit(t_stash *stash);
+char	*ft_clean_exit(t_stash *stash);
 
 // if (stash_old is NULL) ~ starting condition,
 // it will create an empty ft_strempty
@@ -31,7 +31,7 @@ char	*ft_stash_append(t_stash *stash, const char *buff)
 	return (stash->stash_strt_ptr);
 }
 
-static void	ft_stash_append_helpr(char *stash_new, t_stash *stash, \
+void	ft_stash_append_helpr(char *stash_new, t_stash *stash, \
 								const char *buff)
 {
 	size_t	i;
@@ -72,7 +72,7 @@ char	*ft_clean_exit(t_stash *stash)
 	return (NULL);
 }
 
-static size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	str_len;
 
