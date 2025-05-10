@@ -6,7 +6,7 @@
 /*   By: kclaes <kclaes@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:26:20 by kclaes        #+#    #+#                 */
-/*   Updated: 2025/05/07 18:41:51 by kclaes        ########   odam.nl         */
+/*   Updated: 2025/05/10 14:25:10 by kclaes        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 #  define BUFF_SIZE 42
 # endif
 # define OPEN_MAX 1024
-# define _RED "\x1b[91m"
-# define _GREEN "\x1b[32m"
-# define _RESET "\x1b[0m"
 
 // stash_strt_ptr is the malloc pointer
 // stash is a modified ptr
