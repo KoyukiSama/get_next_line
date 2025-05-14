@@ -47,7 +47,7 @@ char	*ft_stash_fill(int fd, t_stash *stash)
 
 	buff = malloc(BUFF_SIZE + 1);
 	if (!buff)
-		return (free(buff), ft_clean_exit(stash));
+		return (ft_clean_exit(stash), NULL);
 	while (ft_needs_fill(stash))
 	{
 		if (!ft_buff_read(buff, fd))
